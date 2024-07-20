@@ -5,12 +5,12 @@
       >
         <div class="w-full">
           <img
-            class="object-cover object-left-top w-full sm:aspect-[5/2] aspect-[3/2]"
+            class="object-cover w-full sm:aspect-[5/2] aspect-[3/2]"
             src="{{ posts[0].image }}"
             alt="Image for {{ posts[0].title }}"
           />
         </div>
-        <div class="px-6 py-4 min-h-24 max-h-24">
+        <div class="px-6 py-4 sm:min-h-0 min-h-24 max-h-24 sm:text-center text-left">
           <div class="font-bold text-xl mb-2 leading-5">{{ posts[0].title }}</div>
           <p>{{ posts[0].summary }}</p>
         </div>

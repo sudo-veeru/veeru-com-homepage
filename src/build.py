@@ -55,20 +55,6 @@ def write_output(content, *path):
         f.write(content)
 
 
-def get_post(folder, file):
-    obj = frontmatter.load(f"posts/{folder}/{file}")
-    html = mistune.html(obj.content)
-
-    obj.content = html
-    obj["slug"] = file.replace(".md", "")
-    obj["href"] = f"/{folder}/{obj['slug']}"
-
-    if "order" not in obj:
-        obj["order"] = 0
-
-    return obj
-
-
 def og_tags(data: dict):
     tags = []
     for key, value in data.items():
@@ -93,19 +79,25 @@ class Services:
             self.services[service] = fm
 
     def slugs(self):
-        return self.services.keys()
+        sorted_keys = sorted(self.services.keys(), key=lambda x: self.services[x]["rank"])
+        return sorted_keys
 
     def render_list(self):
         template = env.get_template(f"posts/services/list.html")
-        return template.render(posts=list(self.services.values()))
+        service_list = [self.services[slug] for slug in self.slugs()]
+        return template.render(posts=service_list)
 
     def service_listings(self, slug):
         listings = set(os.listdir(os.path.join("posts", "services", slug))) - {"service.md"}
+        out = []
         for listing in listings:
             fm = frontmatter.load(os.path.join("posts", "services", slug, listing))
             fm["slug"] = f"{slug}/{listing.replace('.md', '')}"
 
-            yield fm
+            out.append(fm)
+
+        out = sorted(out, key=lambda x: x["rank"])
+        return out
 
     def render_post(self, slug):
         post = self.services[slug]
@@ -119,31 +111,31 @@ class Services:
         return rendered
 
 
-# twitter_tags_common = {
-#     "domain": domain,
-#     "card": "summary_large_image",
-#     "site": twitter_username,
-# }
+twitter_tags_common = {
+    "domain": domain,
+    "card": "summary_large_image",
+    "site": twitter_username,
+}
 
 
-# def twitter_tags(data: dict):
-#     lut = {
-#         "card": "name",
-#         "domain": "property",
-#         "url": "property",
-#         "title": "name",
-#         "description": "name",
-#         "image": "name",
-#         "site": "name",
-#     }
+def twitter_tags(data: dict):
+    lut = {
+        "card": "name",
+        "domain": "property",
+        "url": "property",
+        "title": "name",
+        "description": "name",
+        "image": "name",
+        "site": "name",
+    }
 
-#     data = {**twitter_tags_common, **data}
+    data = {**twitter_tags_common, **data}
 
-#     tags = []
-#     for key, value in data.items():
-#         tags.append(f'<meta {lut[key]}="twitter:{key}" content="{value}">')
+    tags = []
+    for key, value in data.items():
+        tags.append(f'<meta {lut[key]}="twitter:{key}" content="{value}">')
 
-#     return tags
+    return tags
 
 
 # def post_seotags(folder, post):

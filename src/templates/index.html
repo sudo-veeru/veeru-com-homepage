@@ -2,24 +2,22 @@
 {% from "components/fieldset.html" import fieldset %}
 
 {% block content %}
+  <article class="">
+    <h2 class="m-0 text-2xl">Curated Local Experts</h2>
+    <h3 class="italic text-lg m-0 font-normal">Discover trusted local experts for all your needs, handpicked just for you</h3>
+    <div class="h-4"></div>
+  </article>
   <div class="flex flex-col gap-4">
-    <!-- {% call fieldset("whoami") %}
-      <div class="flex flex-col gap-3 text-lg">
-        <p>
-          Hi there! I am a <span id="age"></span> y/o student at Purdue
-          University majoring in Computer Science. I like rockets and computers.
-          Some of my hobbies include photography, reading sci-fi, 3d printing,
-          software defined radio, and climbing
-        </p>
+    <!-- {% call fieldset("whoami") %} -->
+      <!-- <div class="flex flex-col gap-3 text-lg">
         <img
-          src="/assets/me.jpg"
-          alt="me in front of an sr-71"
+          src="/assets/real-estate.jpg"
           class="h-[350px] object-cover"
         />
-      </div>
-    {% endcall %} -->
-    {% call fieldset("Services") %}
+      </div> -->
+    <!-- {% endcall %} -->
+    <!-- {% call fieldset("Curated local services") %} -->
       {{ lists["services"]|safe }}
-    {% endcall %}
+    <!-- {% endcall %} -->
   </div>
 {% endblock %}
