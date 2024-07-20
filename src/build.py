@@ -1,4 +1,4 @@
-name = f"veeru.com"
+name = f"Veeru.com"
 domain = "veeru.com"
 generic_username = "veerup"
 twitter_username = f"@{generic_username}"
@@ -103,12 +103,17 @@ class Services:
         post = self.services[slug]
         listings = list(self.service_listings(slug))
 
+        seotags = post_seotags("services", post)
+
         template = env.get_template(f"posts/services/page.html")
         rendered = template.render(
-            post=post, listings=listings, title=f"{name} | {post['title']}", name=name
+            post=post, listings=listings, title=f"{post['title']} | {name}", name=name
         )
+        soup = bs(rendered)
+        for item in seotags:
+            soup.head.append(bs(item))
 
-        return rendered
+        return soup.renderContents().decode("utf-8")
 
 
 twitter_tags_common = {
@@ -138,50 +143,32 @@ def twitter_tags(data: dict):
     return tags
 
 
-# def post_seotags(folder, post):
-#     items_common = {
-#         "url": urljoin(url, f"/{folder}/{post['slug']}"),
-#     }
+def post_seotags(folder, post):
+    items_common = {
+        "url": urljoin(url, f"/{folder}/{post['slug']}"),
+    }
 
-#     if "title" in post:
-#         items_common["title"] = f"{name} | {post['title']}"
+    if "title" in post:
+        items_common["title"] = f"{post['title']} | {name}"
 
-#     if "summary" in post:
-#         items_common["description"] = post["summary"]
+    if "summary" in post:
+        items_common["description"] = post["summary"]
 
-#     if "coverImage" in post:
-#         items_common["image"] = urljoin(url, post["coverImage"])
+    if "image" in post:
+        items_common["image"] = urljoin(url, post["image"])
 
-#     items_og = {
-#         **items_common,
-#         "type": "website",
-#     }
+    items_og = {
+        **items_common,
+        "type": "website",
+    }
 
-#     items_twitter = {
-#         **items_common,
-#         "card": "summary_large_image",
-#         "domain": domain,
-#     }
+    items_twitter = {
+        **items_common,
+        "card": "summary_large_image",
+        "domain": domain,
+    }
 
-#     return og_tags(items_og) + twitter_tags(items_twitter)
-
-
-# def render_post(folder, post):
-#     template = env.get_template(f"posts/{folder}/page.html")
-#     rendered = template.render(post=post, title=f"{name} | {post['title']}", name=name)
-
-#     soup = bs(rendered)
-#     og = post_seotags(folder, post)
-
-#     for item in og:
-#         soup.head.append(bs(item))
-
-#     return soup.renderContents().decode("utf-8")
-
-
-# def render_post_list(folder, posts):
-#     template = env.get_template(f"posts/{folder}/list.html")
-#     return template.render(posts=posts)
+    return og_tags(items_og) + twitter_tags(items_twitter)
 
 type_class = {
     "services": Services
@@ -195,41 +182,42 @@ for post_folder in post_folders:
     slugs = obj.slugs()
 
     for slug in slugs:
-        # write_output(
-        #     render_post(post_folder, post), post_folder, f"{post['slug']}.html"
-        # )
         write_output(
             obj.render_post(slug),
             post_folder,
             f"{slug}.html",
         )
 
-    # lists[post_folder] = render_post_list(post_folder, posts)
     lists[post_folder] = obj.render_list()
 
 
-# seo_common = {
-#     "url": url,
-#     "title": name,
-#     "description": f"{name} service catalog",
-#     "image": urljoin(url, "/assets/me.jpg"),
-# }
+seo_common = {
+    "url": url,
+    "title": name,
+    "description": f"Find a curated list of trusted local experts, hand picked just for you",
+    # "image": urljoin(url, "/assets/me.jpg"),
+}
 
-# og = og_tags(
-#     {
-#         **seo_common,
-#         "type": "website",
-#     }
-# )
+og = og_tags(
+    {
+        **seo_common,
+        "type": "website",
+    }
+)
 
-# twitter = twitter_tags({**seo_common, "card": "summary"})
-# seotags = og + twitter
+twitter = twitter_tags({**seo_common, "card": "summary"})
+seotags = og + twitter
 
 index = env.get_template("index.html")
-rendered = index.render(lists=lists, name=name, title=name)
-
-soup = bs(rendered)
-# for item in seotags:
-#     soup.head.append(bs(item))
+rendered_index = index.render(lists=lists, name=name, title=name)
+soup = bs(rendered_index)
+for item in seotags:
+    soup.head.append(bs(item))
 
 write_output(soup.renderContents().decode("utf-8"), "index.html")
+
+contact = env.get_template("contact.html")
+rendered_contact = contact.render(name=name, title=f"Contact | {name}")
+soup = bs(rendered_contact)
+write_output(soup.renderContents().decode("utf-8"), "contact.html")
+
