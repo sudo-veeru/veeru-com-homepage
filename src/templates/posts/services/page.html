@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% from "components/fieldset.html" import fieldset %}
+
+{% block content %}
+  <article class="mt-2">
+    <h2 class="m-0 mb-1 text-4xl">{{ post.title }}</h2>
+    <h3 class="italic text-xl m-0 font-normal">{{ post.summary }}</h3>
+    <div class="h-4" />
+  </article>
+  <img src="{{ post.image }}" class="mb-4" />
+  <h2 class="text-2xl font-bold mb-4 mt-4">Listings</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-1 gap-4">
+    {% for listing in listings %}
+      <div
+        class="flex sm:flex-row flex-col justify-between rounded-none outline outline-1 outline-black dark:outline-gray-300 overflow-hidden mb-[6px]"
+      >
+        <div class="flex flex-col justify-between px-6 py-4 sm:w-1/2">
+          <div>
+            <div class="font-bold text-xl mb-2 leading-5">
+              {{ listing.title }}
+            </div>
+            <p>{{ listing.summary }}</p>
+          </div>
+          <div class="mt-4">
+            <!-- <p class="text-2xl font-bold">{{ listing.email }}</p>
+            <p class="text-2xl font-bold">{{ listing.phone }}</p> -->
+            <!-- <p>
+              {{ listing.email and "Email: " ~ listing.email }}
+              {{ listing.phone and "Phone: " ~ listing.phone }}
+            </p> -->
+            {{ listing.email and ("<a class='underline text-blue-700' href='mailto:" ~ listing.email ~ "'>" ~ listing.email ~ "</a>")|safe }}
+            {{ listing.phone and ("<p>" ~ listing.phone ~ "</p>")|safe }}
+            {{ listing.address and ("<p class='mt-2'>" ~ listing.address ~ "</p>")|safe }}
+          </div>
+        </div>
+        <img
+          class="object-cover object-left-top h-60 aspect-square"
+          src="{{ listing.image }}"
+          alt="Image for {{ listing.title }}"
+        />
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

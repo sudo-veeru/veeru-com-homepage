@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% from "components/fieldset.html" import fieldset %}
+
+{% block content %}
+  <div class="flex flex-col gap-4">
+    <!-- {% call fieldset("whoami") %}
+      <div class="flex flex-col gap-3 text-lg">
+        <p>
+          Hi there! I am a <span id="age"></span> y/o student at Purdue
+          University majoring in Computer Science. I like rockets and computers.
+          Some of my hobbies include photography, reading sci-fi, 3d printing,
+          software defined radio, and climbing
+        </p>
+        <img
+          src="/assets/me.jpg"
+          alt="me in front of an sr-71"
+          class="h-[350px] object-cover"
+        />
+      </div>
+    {% endcall %} -->
+    {% call fieldset("Services") %}
+      {{ lists["services"]|safe }}
+    {% endcall %}
+  </div>
+{% endblock %}
