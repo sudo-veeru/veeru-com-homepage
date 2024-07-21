@@ -1,6 +1,6 @@
 ---
 image: /assets/catering.jpg
-title: Catering
-summary: Catering services for all types of events
-rank: 3
+title: Movers
+summary: Short Distance and Long Distance Out of State Movers
+rank: 7
 ---
