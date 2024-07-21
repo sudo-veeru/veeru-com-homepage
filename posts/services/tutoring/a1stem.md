@@ -1,10 +1,9 @@
 ---
-image: /assets/A1.jpg
-title: A1 Stem Academy
-summary: Specialize in Math, Physics, SAT/PSAT prep, Biology, or Chemistry, our goal is to help you achieve high scores and a deep understanding of the subject matter.
-email: 
+image: /assets/A1.png
+title: <a href="https://a1stemacademy.com/">A1 Stem Academy</a>
+summary: Specialize in Math, Physics, SAT/PSAT prep, Biology, and Chemistry, our goal is to help you achieve high scores and a deep understanding of the subject matter.
+
 phone: 908-940-1855
-address: 
 
 rank: 1
 ---
