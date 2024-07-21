@@ -1,6 +1,6 @@
 ---
-image: /assets/catering.jpg
-title: Tution
+image: /assets/Tutor2.jpg
+title: Tutoring
 summary: Best 1 - 1 and group Tutoring Services
-rank: 3
+rank: 2
 ---
