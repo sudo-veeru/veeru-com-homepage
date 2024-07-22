@@ -58,7 +58,7 @@ html_static() {
 
     my_wait $hpid $spid
 
-    opt_imgs &
+    # opt_imgs &
 }
 
 rm -rf dist && mkdir dist
