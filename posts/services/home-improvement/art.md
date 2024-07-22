@@ -1,5 +1,5 @@
 ---
-image: /assets/Manjula.jpeg
+image: /assets/Manjula.jpg
 title: ART HVAC
 summary: ART HVAC
 
