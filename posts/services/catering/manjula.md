@@ -1,5 +1,5 @@
 ---
-image: /assets/Manjula.jpeg
+image: /assets/Manjula.jpg
 title: Manjula's Kitchen
 summary: We offer amazing South Indian vegetarian dishes. We do catering for all occasions.
 email: ManjulaKitchenEdison@gmail.com

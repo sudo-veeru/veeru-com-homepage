@@ -1,6 +1,6 @@
 ---
-image: /assets/catering.jpg
-title: Home Improvement and Repairs
+image: /assets/repair1.jpg
+title: Home Services
 summary: Various Home Improvement and Repair Services
 rank: 4
 ---

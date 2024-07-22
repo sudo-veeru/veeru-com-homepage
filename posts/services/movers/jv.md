@@ -1,5 +1,5 @@
 ---
-image: /assets/Manjula.jpeg
+image: /assets/mover2.jpeg
 title: JV Movers
 summary: Your New Jersey Moving Company.
 
