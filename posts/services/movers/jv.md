@@ -1,5 +1,5 @@
 ---
-image: /assets/mover2.jpg
+image: /assets/mover2.webp
 title: JV Movers
 summary: Your New Jersey Moving Company.
 

@@ -1,5 +1,5 @@
 ---
-image: /assets/dj2.jpg
+image: /assets/dj2.webp
 title: Rajan Entertainment & DJ Services
 summary: Multi talented entertainer, live singing and music performance. DJ Services for all type of events.
 

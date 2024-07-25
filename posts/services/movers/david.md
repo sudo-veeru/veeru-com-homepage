@@ -1,5 +1,5 @@
 ---
-image: /assets/mover2.jpg
+image: /assets/mover2.webp
 title: David Movers
 summary: New Jersey Movers.
 

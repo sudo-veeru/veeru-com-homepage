@@ -1,5 +1,5 @@
 ---
-image: /assets/finance2.jpg
+image: /assets/finance2.webp
 title: Madhu Financial Services
 summary: Financial and Insurance Services for short term and ling term needs
 
